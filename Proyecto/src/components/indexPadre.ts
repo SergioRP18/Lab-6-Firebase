@@ -1,0 +1,1 @@
+export { default as song } from '../components/song/song';
