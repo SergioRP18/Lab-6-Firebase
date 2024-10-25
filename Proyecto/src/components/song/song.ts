@@ -1,16 +1,18 @@
 export enum Attribute {
+    "uid"="uid",
     "image" = "image",
     "name" = "name",
-    "autor" = "autor",
+    "author" = "author",
     "album" = "album",
     "dateAdded" = "dateAdded",
     "duration" = "duration",
 }
 
 class AppSong extends HTMLElement {
+    uid?: number;
     image?: string;
     name?: string;
-    autor?: string;
+    author?: string;
     album?: string;
     dateAdded?: number;
     duration?: number;
@@ -21,6 +23,10 @@ class AppSong extends HTMLElement {
 
     attributeChangedCallback(propName:Attribute, oldValue: string | undefined, newValue: string | undefined){
         switch(propName){
+            case Attribute.uid:
+                this.uid = newValue ? Number(newValue) : undefined;
+                break;
+
             case Attribute.dateAdded:
                 this.dateAdded = newValue ? Number(newValue) : undefined;
                 break;
@@ -52,9 +58,9 @@ class AppSong extends HTMLElement {
                     <div class="container">
                         <img src= "${this.image}">
                         <h1>${this.name}</h1>
-                        <h4>${this.autor}</h4>
+                        <h4>${this.author}</h4>
                         <p>${this.album}</p>
-                        <span>${this.dateAdded}</span>
+                        <span><b>${this.dateAdded}<b></span>
                         <span>${this.duration}</span>
                     </div>
                 </section>
