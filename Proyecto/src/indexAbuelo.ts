@@ -1,7 +1,6 @@
 import './components/indexPadre';
 import './types/Song';
 import { getSongs, addSong } from './utils/Firebase';
-import { Song } from './types/Song';
 
 class AppContainer extends HTMLElement {
 
@@ -20,14 +19,15 @@ class AppContainer extends HTMLElement {
         this.shadowRoot!.innerHTML = '';
 
         await this.renderForm();
-
+        console.log(data);
+        
         data.forEach((element) => {
             const list = this.ownerDocument.createElement("app-song");
             list.setAttribute('image', element.image);
             list.setAttribute('name', element.title);
             list.setAttribute('author', element.author);
             list.setAttribute('album', element.album);
-            list.setAttribute('dateAdded', String(element.dateAdded));
+            list.setAttribute('dateAdded', element.dateadded);
             list.setAttribute('duration', String(element.duration));
             this.shadowRoot?.appendChild(list);
         });
@@ -64,7 +64,7 @@ class AppContainer extends HTMLElement {
             title: (createForm.elements.namedItem('title') as HTMLInputElement).value, 
             author: (createForm.elements.namedItem('author') as HTMLInputElement).value,
             album: (createForm.elements.namedItem('album') as HTMLInputElement).value,
-            dateAdded: new Date().toISOString(),
+            dateadded: new Date().toISOString(),
             duration: totalSeconds,
         };
 

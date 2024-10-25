@@ -4,7 +4,7 @@ export enum Attribute {
     "name" = "name",
     "author" = "author",
     "album" = "album",
-    "dateAdded" = "dateAdded",
+    "dateadded" = "dateadded",
     "duration" = "duration",
 }
 
@@ -14,7 +14,7 @@ class AppSong extends HTMLElement {
     name?: string;
     author?: string;
     album?: string;
-    dateAdded?: number;
+    dateadded?: any;
     duration?: number;
     
     static get observedAttributes(){
@@ -27,8 +27,9 @@ class AppSong extends HTMLElement {
                 this.uid = newValue ? Number(newValue) : undefined;
                 break;
 
-            case Attribute.dateAdded:
-                this.dateAdded = newValue ? Number(newValue) : undefined;
+            case Attribute.dateadded:
+                console.log(newValue);
+                this.dateadded = newValue ? new Date(newValue).toLocaleDateString() : undefined;
                 break;
 
             case Attribute.duration:
@@ -60,7 +61,7 @@ class AppSong extends HTMLElement {
                         <h1>${this.name}</h1>
                         <h4>${this.author}</h4>
                         <p>${this.album}</p>
-                        <span><b>${this.dateAdded}<b></span>
+                        <span><b>${this.dateadded}<b></span>
                         <span>${this.duration}</span>
                     </div>
                 </section>

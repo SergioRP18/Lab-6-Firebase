@@ -1,9 +1,9 @@
 export interface Song {
-    id:string;
+    id:number;
     image: string;
     title: string;
     author: string;
     album: string;
-    dateAdded: string;
+    dateadded: string;
     duration: number;
 }
